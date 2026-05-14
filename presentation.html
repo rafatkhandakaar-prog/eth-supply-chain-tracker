@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<title>Supply Chain Tracker — Project Presentation</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Fira+Code:wght@400;500&display=swap');
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Inter',sans-serif;background:#fff;color:#1a1a2e;font-size:13px;line-height:1.7}
+  @media print{
+    .page-break{page-break-before:always}
+    body{font-size:12px}
+    a{color:#6c63ff!important}
+  }
+  /* COVER */
+  .cover{background:linear-gradient(135deg,#0f0c29,#302b63,#24243e);color:#fff;min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:60px 40px}
+  .cover-badge{background:rgba(108,99,255,.3);border:1px solid rgba(108,99,255,.6);border-radius:30px;padding:8px 24px;font-size:12px;letter-spacing:2px;text-transform:uppercase;color:#a78bfa;margin-bottom:30px}
+  .cover h1{font-size:48px;font-weight:800;margin-bottom:16px;background:linear-gradient(90deg,#fff,#a78bfa);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+  .cover p{font-size:16px;color:#c4b5fd;max-width:600px;margin:0 auto 40px}
+  .cover-meta{display:flex;gap:32px;flex-wrap:wrap;justify-content:center}
+  .cover-meta div{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);border-radius:12px;padding:16px 24px;text-align:center}
+  .cover-meta div span{display:block;font-size:10px;color:#a78bfa;text-transform:uppercase;letter-spacing:1px;margin-bottom:4px}
+  .cover-meta div strong{font-size:14px;color:#fff}
+  .contract-box{margin-top:40px;background:rgba(108,99,255,.2);border:1px solid #6c63ff;border-radius:12px;padding:16px 32px;font-family:'Fira Code',monospace;font-size:12px;color:#c4b5fd;word-break:break-all}
+  /* CONTENT */
+  .section{padding:48px 60px;border-bottom:1px solid #f0f0f0}
+  .section:nth-child(even){background:#fafafa}
+  h2{font-size:22px;font-weight:800;color:#302b63;margin-bottom:24px;padding-bottom:10px;border-bottom:3px solid #6c63ff;display:inline-block}
+  h3{font-size:15px;font-weight:700;color:#302b63;margin:24px 0 12px}
+  p{margin-bottom:12px;color:#444}
+  ul,ol{margin:12px 0 12px 24px;color:#444}
+  li{margin-bottom:6px}
+  strong{color:#302b63}
+  /* TABLE */
+  table{width:100%;border-collapse:collapse;margin:16px 0;font-size:12px}
+  th{background:#302b63;color:#fff;padding:10px 14px;text-align:left;font-weight:600}
+  td{padding:9px 14px;border-bottom:1px solid #e8e8f0;color:#444}
+  tr:nth-child(even) td{background:#f5f4ff}
+  /* CODE */
+  pre{background:#0f0c29;color:#e2e8f0;padding:20px 24px;border-radius:10px;overflow-x:auto;font-family:'Fira Code',monospace;font-size:11.5px;line-height:1.8;margin:16px 0;border-left:4px solid #6c63ff}
+  code{font-family:'Fira Code',monospace;background:#f0f0ff;color:#6c63ff;padding:2px 6px;border-radius:4px;font-size:11px}
+  pre code{background:transparent;color:inherit;padding:0;font-size:inherit}
+  /* CALLOUT */
+  .callout{background:#f5f4ff;border-left:4px solid #6c63ff;border-radius:0 10px 10px 0;padding:14px 20px;margin:16px 0;color:#302b63;font-size:12.5px}
+  .callout.warning{background:#fff8f0;border-color:#f59e0b;color:#92400e}
+  .callout.success{background:#f0fdf4;border-color:#22c55e;color:#166534}
+  /* FEATURE CARDS */
+  .cards{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:16px 0}
+  .card{background:#fff;border:1px solid #e8e8f0;border-radius:12px;padding:20px;box-shadow:0 2px 8px rgba(108,99,255,.08)}
+  .card-icon{font-size:28px;margin-bottom:10px}
+  .card h4{font-size:14px;font-weight:700;color:#302b63;margin-bottom:8px}
+  .card p{font-size:12px;color:#666;margin:0}
+  /* ARCH BOX */
+  .arch{background:#0f0c29;color:#a78bfa;padding:24px;border-radius:12px;font-family:'Fira Code',monospace;font-size:11px;line-height:1.9;margin:16px 0}
+  /* SUMMARY BOX */
+  .summary-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:16px 0}
+  .summary-item{background:#f5f4ff;border-radius:10px;padding:14px 18px}
+  .summary-item span{font-size:10px;color:#6c63ff;text-transform:uppercase;letter-spacing:1px;font-weight:600}
+  .summary-item strong{display:block;font-size:13px;color:#302b63;margin-top:4px}
+  .badge{display:inline-block;background:#6c63ff;color:#fff;border-radius:20px;padding:3px 12px;font-size:10px;font-weight:700;margin:2px}
+  .step{display:flex;gap:14px;margin-bottom:14px;align-items:flex-start}
+  .step-num{background:#6c63ff;color:#fff;width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:12px;flex-shrink:0}
+  .step-text{flex:1;padding-top:4px;font-size:13px;color:#444}
+  .footer{background:#0f0c29;color:#6c63ff;text-align:center;padding:24px;font-size:12px}
+</style>
+</head>
+<body>
+
+<!-- COVER PAGE -->
+<div class="cover">
+  <div class="cover-badge">⛓ Blockchain Project Presentation</div>
+  <h1>Supply Chain Tracker</h1>
+  <p>A Decentralized Application (dApp) built on Ethereum Blockchain using React, TypeScript, Solidity &amp; ethers.js v6</p>
+  <div class="cover-meta">
+    <div><span>Type</span><strong>dApp</strong></div>
+    <div><span>Network</span><strong>Ethereum Sepolia</strong></div>
+    <div><span>Frontend</span><strong>React + TypeScript</strong></div>
+    <div><span>Contract</span><strong>Solidity ^0.8.0</strong></div>
+  </div>
+  <div class="contract-box">
+    Live Contract: 0x06F396e56dBE1a524a6aFc624E37DBA5eD52B216
+  </div>
+</div>
+
+<!-- SECTION 1 -->
+<div class="section">
+  <h2>1. What is this Project?</h2>
+  <p><strong>Supply Chain Tracker</strong> is a blockchain-powered web application that lets anyone register items, transfer ownership, and view full provenance history — all stored permanently and publicly on the Ethereum blockchain.</p>
+  <div class="callout">💡 Think of it like a <strong>permanent, unfakeable digital certificate</strong> for any product — nobody can edit or delete the history. Ever.</div>
+  <h3>Key Facts</h3>
+  <table>
+    <tr><th>Property</th><th>Value</th></tr>
+    <tr><td>Type</td><td>Decentralized Application (dApp)</td></tr>
+    <tr><td>Blockchain</td><td>Ethereum — Sepolia Testnet</td></tr>
+    <tr><td>Live Contract</td><td><code>0x06F396e56dBE1a524a6aFc624E37DBA5eD52B216</code></td></tr>
+    <tr><td>Chain ID</td><td>11155111 (Sepolia)</td></tr>
+    <tr><td>Frontend</td><td>React + TypeScript (Vite)</td></tr>
+    <tr><td>Smart Contract</td><td>Solidity ^0.8.0</td></tr>
+    <tr><td>Wallet</td><td>MetaMask</td></tr>
+  </table>
+</div>
+
+<!-- SECTION 2 -->
+<div class="section">
+  <h2>2. Real World Problem it Solves</h2>
+  <h3>The Problem with Traditional Supply Chains</h3>
+  <ul>
+    <li>Records are stored in <strong>private company databases</strong> — easily manipulated</li>
+    <li>Data can be <strong>edited or deleted</strong> at any time</li>
+    <li>No easy way to verify if a product is genuine</li>
+    <li>Middlemen can <strong>lie about product history</strong></li>
+  </ul>
+  <h3>Example Scenario 🌿</h3>
+  <div class="callout warning">A coffee farmer in Ethiopia sells coffee → exporter → distributor → supermarket → customer.<br><br><strong>Who owned it at each step? Was it really organic? In traditional systems — you just have to trust. You can't verify.</strong></div>
+  <h3>Our Solution ✅</h3>
+  <table>
+    <tr><th>Step</th><th>What Happens on Blockchain</th></tr>
+    <tr><td>Farmer registers batch</td><td>Item added — farmer's wallet becomes permanent owner</td></tr>
+    <tr><td>Sells to exporter</td><td><code>transferItem()</code> called — new owner recorded forever</td></tr>
+    <tr><td>Exporter → distributor</td><td>Another transfer — history grows</td></tr>
+    <tr><td>Customer checks</td><td>Queries by ID — sees every owner, in order, forever</td></tr>
+  </table>
+  <div class="callout success">Nobody can alter this history. Not even us. Not even the government. It's on the blockchain forever.</div>
+</div>
+
+<!-- SECTION 3 -->
+<div class="section page-break">
+  <h2>3. Technology Stack</h2>
+  <div class="arch">┌─────────────────────────────────────────────────────┐
+│                   USER'S BROWSER                    │
+│                                                     │
+│   React + TypeScript (Frontend UI)                  │
+│   ethers.js v6   (Blockchain Communication)         │
+│   MetaMask       (Wallet / Identity)                │
+└────────────────────┬────────────────────────────────┘
+                     │ JSON-RPC
+                     ▼
+┌─────────────────────────────────────────────────────┐
+│              ETHEREUM SEPOLIA TESTNET               │
+│                                                     │
+│   SupplyChain.sol (Smart Contract)                  │
+│   0x06F396e56dBE1a524a6aFc624E37DBA5eD52B216        │
+└─────────────────────────────────────────────────────┘</div>
+  <table>
+    <tr><th>Technology</th><th>What It Is</th><th>Why We Use It</th></tr>
+    <tr><td><strong>React</strong></td><td>JavaScript UI framework</td><td>Build the interactive web interface</td></tr>
+    <tr><td><strong>TypeScript</strong></td><td>JavaScript with types</td><td>Catch bugs before they happen</td></tr>
+    <tr><td><strong>Vite</strong></td><td>Build tool / dev server</td><td>Fast local development</td></tr>
+    <tr><td><strong>Solidity</strong></td><td>Ethereum programming language</td><td>Write the smart contract</td></tr>
+    <tr><td><strong>ethers.js v6</strong></td><td>JavaScript Ethereum library</td><td>Connect React to blockchain</td></tr>
+    <tr><td><strong>MetaMask</strong></td><td>Browser wallet extension</td><td>User identity + sign transactions</td></tr>
+    <tr><td><strong>Sepolia</strong></td><td>Ethereum test network</td><td>Deploy without real money</td></tr>
+    <tr><td><strong>Remix IDE</strong></td><td>Online Solidity editor</td><td>Compile and deploy the contract</td></tr>
+  </table>
+</div>
+
+<!-- SECTION 4 -->
+<div class="section">
+  <h2>4. Smart Contract — The Heart of the App</h2>
+  <p>The smart contract is the <strong>backend</strong> of this app. It runs on the blockchain — no company, no server, nobody controls it.</p>
+  <pre><code>// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
+
+contract SupplyChain {
+
+    // Data Structure — what each item stores
+    struct Item {
+        uint id;            // unique number (1, 2, 3...)
+        string name;        // product name
+        address owner;      // current owner's wallet address
+        address[] history;  // list of ALL past owners
+    }
+
+    mapping(uint =&gt; Item) public items;  // id → Item lookup
+    uint public itemCount;               // total items counter
+
+    event ItemAdded(uint id, string name, address owner);
+    event ItemTransferred(uint id, address from, address to);
+
+    // Function 1: Add a new item
+    function addItem(string memory _name) public {
+        itemCount++;
+        items[itemCount] = Item(itemCount, _name, msg.sender, new address[](0));
+        items[itemCount].history.push(msg.sender); // creator = first owner
+        emit ItemAdded(itemCount, _name, msg.sender);
+    }
+
+    // Function 2: Transfer ownership (only owner can call this)
+    function transferItem(uint _id, address _to) public {
+        require(items[_id].owner == msg.sender, "Not owner"); // security!
+        items[_id].owner = _to;
+        items[_id].history.push(_to); // record new owner in history
+        emit ItemTransferred(_id, msg.sender, _to);
+    }
+
+    // Function 3: Read full ownership history (free, no gas)
+    function getHistory(uint _id) public view returns (address[] memory) {
+        return items[_id].history;
+    }
+}</code></pre>
+  <h3>Code Explanation</h3>
+  <table>
+    <tr><th>Code</th><th>Simple Meaning</th></tr>
+    <tr><td><code>struct Item</code></td><td>A blueprint — what info each item stores</td></tr>
+    <tr><td><code>mapping(uint =&gt; Item)</code></td><td>A dictionary: number → item data</td></tr>
+    <tr><td><code>msg.sender</code></td><td>The wallet address of whoever calls the function</td></tr>
+    <tr><td><code>require(...)</code></td><td>Security guard — rejects transaction if condition fails</td></tr>
+    <tr><td><code>history.push(_to)</code></td><td>Permanently adds new owner to the trail</td></tr>
+    <tr><td><code>public view</code></td><td>Read-only function — completely free, no gas</td></tr>
+    <tr><td><code>emit ItemAdded(...)</code></td><td>Fires a blockchain event — apps can listen for it</td></tr>
+  </table>
+</div>
+
+<!-- SECTION 5 -->
+<div class="section page-break">
+  <h2>5. Frontend Code Explained</h2>
+  <h3>Project File Structure</h3>
+  <pre><code>Project1/
+├── src/
+│   ├── App.tsx          ← Main app (all logic + UI)
+│   ├── App.css          ← Styling
+│   └── main.tsx         ← Entry point
+├── contracts/
+│   └── SupplyChain.sol  ← Smart contract
+├── .env                 ← Contract address
+└── package.json         ← Dependencies</code></pre>
+
+  <h3>Part 1 — Connecting to Ethereum (Provider)</h3>
+  <pre><code>import { BrowserProvider, Contract } from 'ethers'
+
+// Creates a connection to MetaMask (the user's wallet in browser)
+const provider = useMemo(() =&gt; {
+  if (typeof window !== 'undefined' &amp;&amp; 'ethereum' in window) {
+    return new BrowserProvider((window as any).ethereum)
+    //         ↑ reads from MetaMask, connects to blockchain
+  }
+  return null
+}, [])</code></pre>
+  <div class="callout">BrowserProvider is like a phone line from our React app to the Ethereum network, going through MetaMask.</div>
+
+  <h3>Part 2 — Sending a Transaction (Add Item)</h3>
+  <pre><code>const addItem = async () =&gt; {
+  // Step 1: Get the signer (user's wallet — ethers v6 is async!)
+  const signer = await provider.getSigner()
+
+  // Step 2: Connect to the smart contract with signer
+  const contract = new Contract(contractAddress, abi, signer)
+
+  // Step 3: Call the smart contract function → MetaMask popup appears
+  const tx = await contract.addItem(itemName)
+
+  // Step 4: Wait for blockchain to confirm the transaction
+  const receipt = await tx.wait()
+
+  // Step 5: Show success with Etherscan link
+  addToast('success', 'Item added!', receipt?.hash)
+}</code></pre>
+
+  <h3>Part 3 — Network Safety (Auto-switch to Sepolia)</h3>
+  <pre><code>// Check if MetaMask is on Sepolia testnet
+const checkNetwork = async () =&gt; {
+  const network = await provider.getNetwork()
+  const onSepolia = network.chainId === BigInt(11155111)
+  setWrongNetwork(!onSepolia) // shows red banner if wrong
+}
+
+// One-click switch to Sepolia
+const switchToSepolia = async () =&gt; {
+  await window.ethereum.request({
+    method: 'wallet_switchEthereumChain',
+    params: [{ chainId: '0xaa36a7' }], // Sepolia in hex
+  })
+}
+
+// Listen for network changes in real time
+useEffect(() =&gt; {
+  window.ethereum.on('chainChanged', () =&gt; checkNetwork())
+}, [])</code></pre>
+</div>
+
+<!-- SECTION 6 -->
+<div class="section">
+  <h2>6. App Features</h2>
+  <div class="cards">
+    <div class="card">
+      <div class="card-icon">➕</div>
+      <h4>Add Item</h4>
+      <p>Type a product name → click "Add Item to Chain" → MetaMask confirms → item gets a permanent ID on the blockchain. You become the owner.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">🔁</div>
+      <h4>Transfer Ownership</h4>
+      <p>Enter item ID + recipient wallet address. Smart contract verifies you are the owner using <code>require()</code>. If yes — ownership transfers permanently.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">📦</div>
+      <h4>Browse All Items</h4>
+      <p>App calls <code>itemCount()</code> then loops through all items. Shows name, current owner, and hop count. Completely free — no gas needed.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">🔍</div>
+      <h4>Query Item History</h4>
+      <p>Enter any item ID. App calls <code>getHistory()</code> and shows every single wallet address that ever owned the item, in order.</p>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 7 -->
+<div class="section page-break">
+  <h2>7. Deployment Details</h2>
+  <table>
+    <tr><th>Field</th><th>Value</th></tr>
+    <tr><td>Contract Name</td><td>SupplyChain</td></tr>
+    <tr><td>Network</td><td>Ethereum Sepolia Testnet</td></tr>
+    <tr><td>Contract Address</td><td><code>0x06F396e56dBE1a524a6aFc624E37DBA5eD52B216</code></td></tr>
+    <tr><td>Deployed By</td><td><code>0xa41A871028d4617a2E7859EFF8806385349c7f7A</code></td></tr>
+    <tr><td>Verified On</td><td>Blockscout ✅ &nbsp; Routescan ✅ &nbsp; Sourcify ✅</td></tr>
+    <tr><td>Deploy Tool</td><td>Remix IDE (remix.ethereum.org)</td></tr>
+    <tr><td>Compiler</td><td>Solidity ^0.8.0</td></tr>
+  </table>
+
+  <h3>How to Run Locally</h3>
+  <pre><code># 1. Install dependencies
+npm install
+
+# 2. Create .env file with your contract address
+VITE_CONTRACT_ADDRESS=0x06F396e56dBE1a524a6aFc624E37DBA5eD52B216
+
+# 3. Start development server
+npm run dev
+
+# 4. Open in browser
+http://localhost:5173/</code></pre>
+
+  <h3>How to Use the App — Step by Step</h3>
+  <div class="step"><div class="step-num">1</div><div class="step-text">Open <code>http://localhost:5173/</code> in Chrome/Firefox with MetaMask installed</div></div>
+  <div class="step"><div class="step-num">2</div><div class="step-text">Click <strong>"Connect Wallet"</strong> → MetaMask popup → approve connection</div></div>
+  <div class="step"><div class="step-num">3</div><div class="step-text">App auto-detects network — if wrong, click <strong>"Switch to Sepolia"</strong></div></div>
+  <div class="step"><div class="step-num">4</div><div class="step-text">Go to <strong>➕ Add Item</strong> tab → type a name → click "Add Item to Chain"</div></div>
+  <div class="step"><div class="step-num">5</div><div class="step-text">MetaMask shows gas fee popup → click <strong>Confirm</strong></div></div>
+  <div class="step"><div class="step-num">6</div><div class="step-text">Wait 15–30 seconds → green ✅ toast: "Item added!" with Etherscan link</div></div>
+  <div class="step"><div class="step-num">7</div><div class="step-text">Go to <strong>📦 Browse</strong> → your item appears with ID, name, owner</div></div>
+  <div class="step"><div class="step-num">8</div><div class="step-text">Go to <strong>🔍 Query</strong> → enter item ID → see full ownership history</div></div>
+</div>
+
+<!-- SECTION 8 -->
+<div class="section">
+  <h2>8. Why Blockchain?</h2>
+  <table>
+    <tr><th>Feature</th><th>Traditional Database</th><th>Blockchain (Our App)</th></tr>
+    <tr><td>Who controls data</td><td>Company / Owner</td><td><strong>Nobody — decentralized</strong></td></tr>
+    <tr><td>Can data be edited</td><td>Yes, anytime</td><td><strong>Never</strong></td></tr>
+    <tr><td>Can data be deleted</td><td>Yes</td><td><strong>Never</strong></td></tr>
+    <tr><td>Who can verify</td><td>Only authorized people</td><td><strong>Anyone in the world</strong></td></tr>
+    <tr><td>Downtime possible</td><td>Yes (server crash)</td><td>No — always running</td></tr>
+    <tr><td>Trust required</td><td>Must trust the company</td><td><strong>Trust the math</strong></td></tr>
+  </table>
+  <h3>Key Blockchain Terms</h3>
+  <table>
+    <tr><th>Term</th><th>Simple Explanation</th></tr>
+    <tr><td><strong>Wallet Address</strong></td><td>Your identity on blockchain — like an email address</td></tr>
+    <tr><td><strong>Private Key</strong></td><td>Your password — MetaMask stores it securely</td></tr>
+    <tr><td><strong>Transaction</strong></td><td>Any action that changes blockchain data (costs gas)</td></tr>
+    <tr><td><strong>Gas</strong></td><td>Small fee paid to validators for processing your transaction</td></tr>
+    <tr><td><strong>Smart Contract</strong></td><td>Self-executing code that lives permanently on the blockchain</td></tr>
+    <tr><td><strong>ABI</strong></td><td>Menu that tells the app what functions the contract has</td></tr>
+    <tr><td><strong>Testnet</strong></td><td>Practice blockchain using fake ETH — no real money</td></tr>
+  </table>
+</div>
+
+<!-- SUMMARY -->
+<div class="section">
+  <h2>📊 Project Summary</h2>
+  <div class="summary-grid">
+    <div class="summary-item"><span>Project Name</span><strong>Supply Chain Tracker</strong></div>
+    <div class="summary-item"><span>Type</span><strong>Decentralized App (dApp)</strong></div>
+    <div class="summary-item"><span>Blockchain</span><strong>Ethereum Sepolia Testnet</strong></div>
+    <div class="summary-item"><span>Frontend</span><strong>React + TypeScript + Vite</strong></div>
+    <div class="summary-item"><span>Smart Contract</span><strong>Solidity ^0.8.0</strong></div>
+    <div class="summary-item"><span>Library</span><strong>ethers.js v6</strong></div>
+    <div class="summary-item"><span>Wallet</span><strong>MetaMask</strong></div>
+    <div class="summary-item"><span>Deploy Tool</span><strong>Remix IDE</strong></div>
+  </div>
+  <h3>Features Delivered</h3>
+  <span class="badge">✅ Add Items to Blockchain</span>
+  <span class="badge">✅ Transfer Ownership</span>
+  <span class="badge">✅ Browse All Items</span>
+  <span class="badge">✅ Query Ownership History</span>
+  <span class="badge">✅ Auto Network Detection</span>
+  <span class="badge">✅ One-Click Network Switch</span>
+  <span class="badge">✅ Live Etherscan Links</span>
+  <span class="badge">✅ Toast Notifications</span>
+  <span class="badge">✅ No Server Needed</span>
+  <span class="badge">✅ Fully Decentralized</span>
+</div>
+
+<div class="footer">
+  Supply Chain Tracker dApp — Built on Ethereum Sepolia Testnet &nbsp;|&nbsp;
+  Contract: 0x06F396e56dBE1a524a6aFc624E37DBA5eD52B216
+</div>
+
+</body>
+</html>
